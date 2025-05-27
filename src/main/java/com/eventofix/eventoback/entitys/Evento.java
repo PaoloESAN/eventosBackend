@@ -28,16 +28,14 @@ public class Evento {
 
     @Column(name = "locacion_id")
     private Long locacionId;
-
     @Column(name = "organizador_id", nullable = false)
     private Long organizadorId;
 
     @Column(name = "categoria")
     private String categoria;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "estado")
-    private EstadoEvento estado = EstadoEvento.PLANIFICADO;
+    private String estado = "planificado";
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "locacion_id", insertable = false, updatable = false)
@@ -46,21 +44,4 @@ public class Evento {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organizador_id", insertable = false, updatable = false)
     private Usuario organizador;
-
-    public enum EstadoEvento {
-        PLANIFICADO("planificado"),
-        ACTIVO("activo"),
-        CANCELADO("cancelado"),
-        COMPLETADO("completado");
-
-        private final String valor;
-
-        EstadoEvento(String valor) {
-            this.valor = valor;
-        }
-
-        public String getValor() {
-            return valor;
-        }
-    }
 }
