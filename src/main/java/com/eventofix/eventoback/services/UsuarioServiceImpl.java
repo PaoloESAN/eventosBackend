@@ -1,6 +1,7 @@
 package com.eventofix.eventoback.services;
 
 import com.eventofix.eventoback.entitys.Usuario;
+import com.eventofix.eventoback.exceptions.EmailExisteError;
 import com.eventofix.eventoback.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Usuario crearUsuario(Usuario usuario) {
+        if (usuarioRepository.existsByEmail(usuario.getEmail())) {
+            throw new EmailExisteError("Ese correo ya ha sido usado");
+        }
         return usuarioRepository.save(usuario);
     }
 
@@ -37,5 +41,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public void eliminarUsuario(Long id) {
         usuarioRepository.deleteById(id);
+    }
+
+    @Override
+    public boolean validarCredenciales(String email, String contrasena) {
+        Usuario usuario = usuarioRepository.findByEmailAndContrasena(email, contrasena);
+        return usuario != null;
     }
 }

@@ -26,8 +26,8 @@ public class Evento {
     @Column(name = "fecha_fin", nullable = false)
     private LocalDateTime fechaFin;
 
-    @Column(name = "locacion_id")
-    private Long locacionId;
+    @Column(name = "locacion")
+    private String locacion;
     @Column(name = "organizador_id", nullable = false)
     private Long organizadorId;
 
@@ -36,10 +36,6 @@ public class Evento {
 
     @Column(name = "estado")
     private String estado = "planificado";
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "locacion_id", insertable = false, updatable = false)
-    private Locacion locacion;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organizador_id", insertable = false, updatable = false)

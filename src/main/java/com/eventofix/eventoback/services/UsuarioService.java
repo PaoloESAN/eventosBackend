@@ -5,8 +5,14 @@ import java.util.List;
 
 public interface UsuarioService {
     Usuario crearUsuario(Usuario usuario);
+
     Usuario obtenerUsuario(Long id);
+
     List<Usuario> listarUsuarios();
+
     Usuario actualizarUsuario(Usuario usuario);
+
     void eliminarUsuario(Long id);
+
+    boolean validarCredenciales(String email, String contrasena);
 }

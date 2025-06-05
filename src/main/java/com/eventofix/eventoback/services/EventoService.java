@@ -16,5 +16,4 @@ public interface EventoService {
 
     List<Evento> obtenerEventosPorOrganizador(Long organizadorId);
 
-    List<Evento> obtenerEventosPorLocacion(Long locacionId);
 }

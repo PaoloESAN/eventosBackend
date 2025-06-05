@@ -48,8 +48,4 @@ public class EventoController {
         return ResponseEntity.ok(eventoService.obtenerEventosPorOrganizador(organizadorId));
     }
 
-    @GetMapping("/locacion/{locacionId}")
-    public ResponseEntity<List<Evento>> obtenerEventosPorLocacion(@PathVariable Long locacionId) {
-        return ResponseEntity.ok(eventoService.obtenerEventosPorLocacion(locacionId));
-    }
 }

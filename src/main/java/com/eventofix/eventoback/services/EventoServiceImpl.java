@@ -44,8 +44,4 @@ public class EventoServiceImpl implements EventoService {
         return eventoRepository.findByOrganizadorId(organizadorId);
     }
 
-    @Override
-    public List<Evento> obtenerEventosPorLocacion(Long locacionId) {
-        return eventoRepository.findByLocacionId(locacionId);
-    }
 }

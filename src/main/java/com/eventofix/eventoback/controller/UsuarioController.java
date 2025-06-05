@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/usuarios")
@@ -41,5 +43,13 @@ public class UsuarioController {
     public ResponseEntity<Void> eliminarUsuario(@PathVariable Long id) {
         usuarioService.eliminarUsuario(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/login/{email}/{contrasena}")
+    public ResponseEntity<Map<String, Boolean>> login(@PathVariable String email, @PathVariable String contrasena) {
+        boolean esValido = usuarioService.validarCredenciales(email, contrasena);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("respuesta", esValido);
+        return ResponseEntity.ok(response);
     }
 }
