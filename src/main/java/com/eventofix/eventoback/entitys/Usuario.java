@@ -2,10 +2,12 @@ package com.eventofix.eventoback.entitys;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Data
 @Entity
 @Table(name = "usuarios")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Usuario {
 
     @Id

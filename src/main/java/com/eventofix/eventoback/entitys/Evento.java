@@ -2,11 +2,13 @@ package com.eventofix.eventoback.entitys;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Table(name = "eventos")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Evento {
 
     @Id
@@ -36,8 +38,8 @@ public class Evento {
 
     @Column(name = "estado")
     private String estado = "planificado";
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organizador_id", insertable = false, updatable = false)
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "eventos" })
     private Usuario organizador;
 }
