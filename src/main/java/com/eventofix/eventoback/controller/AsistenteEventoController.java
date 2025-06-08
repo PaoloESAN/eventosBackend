@@ -21,12 +21,8 @@ public class AsistenteEventoController {
         return new ResponseEntity<>(asistenteEventoService.crearAsistenteEvento(asistenteEvento), HttpStatus.CREATED);
     }
 
-    @GetMapping("/buscar/{eventoId}/{usuarioId}")
-    public ResponseEntity<AsistenteEvento> obtenerAsistenteEvento(@PathVariable Long eventoId,
-            @PathVariable Long usuarioId) {
-        AsistenteEvento.AsistenteEventoId id = new AsistenteEvento.AsistenteEventoId();
-        id.setEventoId(eventoId);
-        id.setUsuarioId(usuarioId);
+    @GetMapping("/buscar/{id}")
+    public ResponseEntity<AsistenteEvento> obtenerAsistenteEvento(@PathVariable Long id) {
         return ResponseEntity.ok(asistenteEventoService.obtenerAsistenteEvento(id));
     }
 
@@ -35,22 +31,15 @@ public class AsistenteEventoController {
         return ResponseEntity.ok(asistenteEventoService.listarAsistentesEvento());
     }
 
-    @PutMapping("/actualizar/{eventoId}/{usuarioId}")
-    public ResponseEntity<AsistenteEvento> actualizarAsistenteEvento(@PathVariable Long eventoId,
-            @PathVariable Long usuarioId,
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<AsistenteEvento> actualizarAsistenteEvento(
+            @PathVariable Long id,
             @RequestBody AsistenteEvento asistenteEvento) {
-        AsistenteEvento.AsistenteEventoId id = new AsistenteEvento.AsistenteEventoId();
-        id.setEventoId(eventoId);
-        id.setUsuarioId(usuarioId);
-        asistenteEvento.setId(id);
-        return ResponseEntity.ok(asistenteEventoService.actualizarAsistenteEvento(asistenteEvento));
+        return ResponseEntity.ok(asistenteEventoService.actualizarAsistenteEvento(id, asistenteEvento));
     }
 
-    @DeleteMapping("/eliminar/{eventoId}/{usuarioId}")
-    public ResponseEntity<Void> eliminarAsistenteEvento(@PathVariable Long eventoId, @PathVariable Long usuarioId) {
-        AsistenteEvento.AsistenteEventoId id = new AsistenteEvento.AsistenteEventoId();
-        id.setEventoId(eventoId);
-        id.setUsuarioId(usuarioId);
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<Void> eliminarAsistenteEvento(@PathVariable Long id) {
         asistenteEventoService.eliminarAsistenteEvento(id);
         return ResponseEntity.noContent().build();
     }
@@ -63,5 +52,10 @@ public class AsistenteEventoController {
     @GetMapping("/usuario/{usuarioId}")
     public ResponseEntity<List<AsistenteEvento>> obtenerEventosPorUsuario(@PathVariable Long usuarioId) {
         return ResponseEntity.ok(asistenteEventoService.obtenerEventosPorUsuario(usuarioId));
+    }
+
+    @GetMapping("/ticket/{ticketId}")
+    public ResponseEntity<List<AsistenteEvento>> obtenerAsistentesPorTicket(@PathVariable Long ticketId) {
+        return ResponseEntity.ok(asistenteEventoService.obtenerAsistentesPorTicket(ticketId));
     }
 }

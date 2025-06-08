@@ -19,7 +19,7 @@ public class AsistenteEventoServiceImpl implements AsistenteEventoService {
     }
 
     @Override
-    public AsistenteEvento obtenerAsistenteEvento(AsistenteEvento.AsistenteEventoId id) {
+    public AsistenteEvento obtenerAsistenteEvento(Long id) {
         return asistenteEventoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Asistente de evento no encontrado"));
     }
@@ -30,22 +30,31 @@ public class AsistenteEventoServiceImpl implements AsistenteEventoService {
     }
 
     @Override
-    public AsistenteEvento actualizarAsistenteEvento(AsistenteEvento asistenteEvento) {
+    public AsistenteEvento actualizarAsistenteEvento(Long id, AsistenteEvento asistenteEvento) {
+        if (!asistenteEventoRepository.existsById(id)) {
+            throw new RuntimeException("Asistente de evento no encontrado");
+        }
+        asistenteEvento.setAsistenteId(id);
         return asistenteEventoRepository.save(asistenteEvento);
     }
 
     @Override
-    public void eliminarAsistenteEvento(AsistenteEvento.AsistenteEventoId id) {
+    public void eliminarAsistenteEvento(Long id) {
         asistenteEventoRepository.deleteById(id);
     }
 
     @Override
     public List<AsistenteEvento> obtenerAsistentesPorEvento(Long eventoId) {
-        return asistenteEventoRepository.findByIdEventoId(eventoId);
+        return asistenteEventoRepository.findByEventoId(eventoId);
     }
 
     @Override
     public List<AsistenteEvento> obtenerEventosPorUsuario(Long usuarioId) {
-        return asistenteEventoRepository.findByIdUsuarioId(usuarioId);
+        return asistenteEventoRepository.findByUsuarioId(usuarioId);
+    }
+
+    @Override
+    public List<AsistenteEvento> obtenerAsistentesPorTicket(Long ticketId) {
+        return asistenteEventoRepository.findByTicketId(ticketId);
     }
 }

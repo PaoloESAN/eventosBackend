@@ -2,43 +2,43 @@ package com.eventofix.eventoback.entitys;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Data
 @Entity
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Table(name = "asistentes_evento")
 public class AsistenteEvento {
 
-    @EmbeddedId
-    private AsistenteEventoId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "asistente_id")
+    private Long asistenteId;
 
-    @Column(name = "fecha_registro")
-    private LocalDateTime fechaRegistro = LocalDateTime.now();
+    @Column(name = "usuario_id", nullable = false)
+    private Long usuarioId;
 
-    @Column(name = "asistio")
-    private Boolean asistio = false;
+    @Column(name = "evento_id", nullable = false)
+    private Long eventoId;
 
-    @Column(name = "feedback", columnDefinition = "TEXT")
-    private String feedback;
+    @Column(name = "ticket_id", nullable = false)
+    private Long ticketId;
 
-    @Column(name = "calificacion")
-    private Integer calificacion;
+    @Column(name = "numero_ticket", nullable = false)
+    private Integer numeroTicket;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "evento_id", insertable = false, updatable = false)
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private Evento evento;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id", insertable = false, updatable = false)
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private Usuario usuario;
 
-    @Embeddable
-    @Data
-    public static class AsistenteEventoId implements java.io.Serializable {
-        @Column(name = "evento_id")
-        private Long eventoId;
-
-        @Column(name = "usuario_id")
-        private Long usuarioId;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ticket_id", insertable = false, updatable = false)
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+    private Ticket ticket;
 }

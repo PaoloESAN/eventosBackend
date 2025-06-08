@@ -29,12 +29,11 @@ public class Ticket {
 
     @Column(name = "fecha_inicio_venta")
     private LocalDateTime fechaInicioVenta;
-
     @Column(name = "fecha_fin_venta")
     private LocalDateTime fechaFinVenta;
 
-    @Column(name = "descripcion", columnDefinition = "TEXT")
-    private String descripcion;
+    @Column(name = "cantidad_total", nullable = false)
+    private Integer cantidadTotal;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "evento_id", insertable = false, updatable = false)

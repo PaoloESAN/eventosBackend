@@ -6,15 +6,17 @@ import java.util.List;
 public interface AsistenteEventoService {
     AsistenteEvento crearAsistenteEvento(AsistenteEvento asistenteEvento);
 
-    AsistenteEvento obtenerAsistenteEvento(AsistenteEvento.AsistenteEventoId id);
+    AsistenteEvento obtenerAsistenteEvento(Long id);
 
     List<AsistenteEvento> listarAsistentesEvento();
 
-    AsistenteEvento actualizarAsistenteEvento(AsistenteEvento asistenteEvento);
+    AsistenteEvento actualizarAsistenteEvento(Long id, AsistenteEvento asistenteEvento);
 
-    void eliminarAsistenteEvento(AsistenteEvento.AsistenteEventoId id);
+    void eliminarAsistenteEvento(Long id);
 
     List<AsistenteEvento> obtenerAsistentesPorEvento(Long eventoId);
 
     List<AsistenteEvento> obtenerEventosPorUsuario(Long usuarioId);
+
+    List<AsistenteEvento> obtenerAsistentesPorTicket(Long ticketId);
 }

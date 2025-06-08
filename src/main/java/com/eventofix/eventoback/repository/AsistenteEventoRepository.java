@@ -6,8 +6,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AsistenteEventoRepository extends JpaRepository<AsistenteEvento, AsistenteEvento.AsistenteEventoId> {
-    List<AsistenteEvento> findByIdEventoId(Long eventoId);
+public interface AsistenteEventoRepository extends JpaRepository<AsistenteEvento, Long> {
+    List<AsistenteEvento> findByEventoId(Long eventoId);
 
-    List<AsistenteEvento> findByIdUsuarioId(Long usuarioId);
+    List<AsistenteEvento> findByUsuarioId(Long usuarioId);
+
+    List<AsistenteEvento> findByTicketId(Long ticketId);
 }
