@@ -24,8 +24,8 @@ public class AsistenteEvento {
     @Column(name = "ticket_id", nullable = false)
     private Long ticketId;
 
-    @Column(name = "numero_ticket", nullable = false)
-    private Integer numeroTicket;
+    @Column(name = "cantidad_tickets", nullable = false)
+    private Integer cantidadTickets;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "evento_id", insertable = false, updatable = false)
