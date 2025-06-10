@@ -43,4 +43,12 @@ public class TicketServiceImpl implements TicketService {
     public List<Ticket> obtenerTicketsPorEvento(Long eventoId) {
         return ticketRepository.findByEventoId(eventoId);
     }
+
+    @Override
+    public Ticket actualizarCantidadDisponible(Long id, Integer nuevaCantidad) {
+        Ticket ticket = ticketRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Ticket no encontrado"));
+        ticket.setCantidadDisponible(nuevaCantidad);
+        return ticketRepository.save(ticket);
+    }
 }

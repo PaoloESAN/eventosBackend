@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/tickets")
@@ -46,5 +47,13 @@ public class TicketController {
     @GetMapping("/evento/{eventoId}")
     public ResponseEntity<List<Ticket>> obtenerTicketsPorEvento(@PathVariable Long eventoId) {
         return ResponseEntity.ok(ticketService.obtenerTicketsPorEvento(eventoId));
+    }
+
+    @PutMapping("/actualizar-cantidad/{id}")
+    public ResponseEntity<Ticket> actualizarCantidadDisponible(@PathVariable Long id,
+            @RequestBody Map<String, Integer> request) {
+        Integer nuevaCantidad = request.get("cantidadDisponible");
+        Ticket ticket = ticketService.actualizarCantidadDisponible(id, nuevaCantidad);
+        return ResponseEntity.ok(ticket);
     }
 }

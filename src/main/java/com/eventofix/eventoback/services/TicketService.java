@@ -15,4 +15,6 @@ public interface TicketService {
     void eliminarTicket(Long id);
 
     List<Ticket> obtenerTicketsPorEvento(Long eventoId);
+
+    Ticket actualizarCantidadDisponible(Long id, Integer nuevaCantidad);
 }
