@@ -37,7 +37,7 @@ public class Evento {
     private String categoria;
 
     @Column(name = "estado")
-    private String estado = "planificado";
+    private String estado = "Planificado";
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organizador_id", insertable = false, updatable = false)
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "eventos" })

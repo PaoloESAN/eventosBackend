@@ -46,10 +46,13 @@ public class UsuarioController {
     }
 
     @GetMapping("/login/{email}/{contrasena}")
-    public ResponseEntity<Map<String, Boolean>> login(@PathVariable String email, @PathVariable String contrasena) {
-        boolean esValido = usuarioService.validarCredenciales(email, contrasena);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("respuesta", esValido);
+    public ResponseEntity<Map<String, Object>> login(@PathVariable String email, @PathVariable String contrasena) {
+        Usuario usuario = usuarioService.validarCredenciales(email, contrasena);
+        Map<String, Object> response = new HashMap<>();
+        response.put("respuesta", usuario != null);
+        if (usuario != null) {
+            response.put("userId", usuario.getUsuarioId());
+        }
         return ResponseEntity.ok(response);
     }
 }

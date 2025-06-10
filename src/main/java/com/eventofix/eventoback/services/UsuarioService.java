@@ -14,5 +14,5 @@ public interface UsuarioService {
 
     void eliminarUsuario(Long id);
 
-    boolean validarCredenciales(String email, String contrasena);
+    Usuario validarCredenciales(String email, String contrasena);
 }

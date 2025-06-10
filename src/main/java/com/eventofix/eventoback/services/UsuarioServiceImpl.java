@@ -44,8 +44,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public boolean validarCredenciales(String email, String contrasena) {
-        Usuario usuario = usuarioRepository.findByEmailAndContrasena(email, contrasena);
-        return usuario != null;
+    public Usuario validarCredenciales(String email, String contrasena) {
+        return usuarioRepository.findByEmailAndContrasena(email, contrasena);
     }
 }
