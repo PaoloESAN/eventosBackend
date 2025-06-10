@@ -16,4 +16,5 @@ public interface EventoService {
 
     List<Evento> obtenerEventosPorOrganizador(Long organizadorId);
 
+    List<Evento> obtenerEventosExceptoOrganizador(Long organizadorId);
 }

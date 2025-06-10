@@ -44,4 +44,8 @@ public class EventoServiceImpl implements EventoService {
         return eventoRepository.findByOrganizadorId(organizadorId);
     }
 
+    @Override
+    public List<Evento> obtenerEventosExceptoOrganizador(Long organizadorId) {
+        return eventoRepository.findByOrganizadorIdNot(organizadorId);
+    }
 }

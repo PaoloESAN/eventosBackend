@@ -48,4 +48,8 @@ public class EventoController {
         return ResponseEntity.ok(eventoService.obtenerEventosPorOrganizador(organizadorId));
     }
 
+    @GetMapping("/excepto-organizador/{organizadorId}")
+    public ResponseEntity<List<Evento>> obtenerEventosExceptoOrganizador(@PathVariable Long organizadorId) {
+        return ResponseEntity.ok(eventoService.obtenerEventosExceptoOrganizador(organizadorId));
+    }
 }
