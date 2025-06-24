@@ -10,11 +10,21 @@ import java.util.Map;
 
 @ControllerAdvice
 public class ErroresGlobales {
-
     @ExceptionHandler(EmailExisteError.class)
     public ResponseEntity<Map<String, String>> emailError(EmailExisteError e) {
         Map<String, String> response = new HashMap<>();
         response.put("mensaje", e.getMessage());
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        response.put("codigo", "EMAIL_DUPLICADO");
+        response.put("tipo", "VALIDACION");
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(NombreEventoExisteError.class)
+    public ResponseEntity<Map<String, String>> nombreEventoError(NombreEventoExisteError e) {
+        Map<String, String> response = new HashMap<>();
+        response.put("mensaje", e.getMessage());
+        response.put("codigo", "NOMBRE_EVENTO_DUPLICADO");
+        response.put("tipo", "VALIDACION");
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 }

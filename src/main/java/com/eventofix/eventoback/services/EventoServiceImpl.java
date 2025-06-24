@@ -1,6 +1,7 @@
 package com.eventofix.eventoback.services;
 
 import com.eventofix.eventoback.entitys.Evento;
+import com.eventofix.eventoback.exceptions.NombreEventoExisteError;
 import com.eventofix.eventoback.repository.EventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,9 @@ public class EventoServiceImpl implements EventoService {
 
     @Override
     public Evento crearEvento(Evento evento) {
+        if (eventoRepository.existsByNombre(evento.getNombre())) {
+            throw new NombreEventoExisteError("Ya existe un evento con ese nombre");
+        }
         return eventoRepository.save(evento);
     }
 
